@@ -6,6 +6,7 @@ import {
   deleteApiDataAsync,
   getApiDataIDAsync,
   putApiDataAsync,
+  stringToSlug,
 } from "../assets/util/method.js";
 
 let arrInput = document.querySelectorAll("#frmThongTinSinhVien .inputData");
@@ -18,6 +19,35 @@ let BASE_URL_GET_ID_API =
   "https://svcy.myclass.vn/api/SinhVienApi/LayThongTinSinhVien?maSinhVien=";
 let BASE_URL_PUT_ID_API =
   "https://svcy.myclass.vn/api/SinhVienApi/CapNhatThongTinSinhVien?maSinhVien=";
+
+document.querySelector("#valueSearch").oninput = async function () {
+  let valueSearch = document.querySelector("#valueSearch").value;
+  let typeSearch = document.querySelector("#typeSearch");
+  let arrSinhVien = await getApiDataAsync(BASE_URL_GET_API);
+  let arrNewSinhVien = [];
+
+  switch (typeSearch.value) {
+    case "tenSV":
+      arrNewSinhVien = arrSinhVien.filter((sv) => {
+        return (
+          stringToSlug(sv.tenSinhVien).indexOf(stringToSlug(valueSearch)) !== -1
+        );
+      });
+      break;
+    case "loaiSV":
+      arrNewSinhVien = arrSinhVien.filter((sv) => {
+        return (
+          stringToSlug(sv.loaiSinhVien).indexOf(stringToSlug(valueSearch)) !==
+          -1
+        );
+      });
+      break;
+    default:
+      break;
+  }
+
+  renderTableSinhVien(arrNewSinhVien);
+};
 
 document.querySelector("#btnLuuThongTin").onclick = async function (e) {
   e.preventDefault();
