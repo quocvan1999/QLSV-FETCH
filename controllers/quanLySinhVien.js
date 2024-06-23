@@ -18,65 +18,78 @@ let BASE_URL_GET_ID_API = BASE_URL + "LayThongTinSinhVien?maSinhVien=";
 let BASE_URL_PUT_ID_API = BASE_URL + "CapNhatThongTinSinhVien?maSinhVien=";
 
 document.querySelector("#valueSearch").oninput = async function () {
-  let valueSearch = document.querySelector("#valueSearch").value;
-  let typeSearch = document.querySelector("#typeSearch");
-  let arrSinhVien = await getApiDataAsync(BASE_URL_GET_API);
-  let arrNewSinhVien = [];
+  try {
+    let valueSearch = document.querySelector("#valueSearch").value;
+    let typeSearch = document.querySelector("#typeSearch");
+    let arrSinhVien = await getApiDataAsync(BASE_URL_GET_API);
+    let arrNewSinhVien = [];
 
-  switch (typeSearch.value) {
-    case "tenSV":
-      arrNewSinhVien = arrSinhVien.filter((sv) => {
-        return (
-          stringToSlug(sv.tenSinhVien).indexOf(stringToSlug(valueSearch)) !== -1
-        );
-      });
-      break;
-    case "loaiSV":
-      arrNewSinhVien = arrSinhVien.filter((sv) => {
-        return (
-          stringToSlug(sv.loaiSinhVien).indexOf(stringToSlug(valueSearch)) !==
-          -1
-        );
-      });
-      break;
-    default:
-      break;
+    switch (typeSearch.value) {
+      case "tenSV":
+        arrNewSinhVien = arrSinhVien.filter((sv) => {
+          return (
+            stringToSlug(sv.tenSinhVien).indexOf(stringToSlug(valueSearch)) !==
+            -1
+          );
+        });
+        break;
+      case "loaiSV":
+        arrNewSinhVien = arrSinhVien.filter((sv) => {
+          return (
+            stringToSlug(sv.loaiSinhVien).indexOf(stringToSlug(valueSearch)) !==
+            -1
+          );
+        });
+        break;
+      default:
+        break;
+    }
+
+    renderTableSinhVien(arrNewSinhVien);
+  } catch (e) {
+    console.log(e);
   }
-
-  renderTableSinhVien(arrNewSinhVien);
 };
 
 document.querySelector("#btnLuuThongTin").onclick = async function (e) {
-  e.preventDefault();
-  let newSV = new SinhVien();
-  let id = 0;
+  try {
+    e.preventDefault();
+    let newSV = new SinhVien();
+    let id = 0;
 
-  for (const input of arrInput) {
-    newSV[input.name] = input.value;
-    id = newSV.maSinhVien;
+    for (const input of arrInput) {
+      newSV[input.name] = input.value;
+      id = newSV.maSinhVien;
+    }
+
+    await putApiDataAsync(BASE_URL_PUT_ID_API, id, newSV);
+    loadAPI(BASE_URL_GET_API);
+
+    document.querySelector("#maSinhVien").disabled = false;
+    document.querySelector("#btnThemSinhVien").classList.remove("d-none");
+    document.querySelector("#btnLuuThongTin").classList.add("d-none");
+
+    resetInput(arrInput);
+  } catch (e) {
+    console.log(e);
   }
-
-  await putApiDataAsync(BASE_URL_PUT_ID_API, id, newSV);
-  loadAPI(BASE_URL_GET_API);
-
-  document.querySelector("#maSinhVien").disabled = false;
-  document.querySelector("#btnThemSinhVien").classList.remove("d-none");
-  document.querySelector("#btnLuuThongTin").classList.add("d-none");
-
-  resetInput(arrInput);
 };
 
 document.querySelector("#btnThemSinhVien").onclick = async function (e) {
   e.preventDefault();
-  let newSV = new SinhVien();
+  try {
+    let newSV = new SinhVien();
 
-  for (const input of arrInput) {
-    newSV[input.name] = input.value;
+    for (const input of arrInput) {
+      newSV[input.name] = input.value;
+    }
+
+    await postApiDataAsync(BASE_URL_POST_API, newSV);
+    loadAPI(BASE_URL_GET_API);
+    resetInput(arrInput);
+  } catch (e) {
+    console.log(e);
   }
-
-  await postApiDataAsync(BASE_URL_POST_API, newSV);
-  loadAPI(BASE_URL_GET_API);
-  resetInput(arrInput);
 };
 
 window.renderTableSinhVien = function (arr) {
@@ -113,26 +126,38 @@ window.renderTableSinhVien = function (arr) {
 };
 
 window.xoaSinhVien = async function (maSV) {
-  await deleteApiDataAsync(BASE_URL_DELETE_API, maSV);
-  loadAPI(BASE_URL_GET_API);
+  try {
+    await deleteApiDataAsync(BASE_URL_DELETE_API, maSV);
+    loadAPI(BASE_URL_GET_API);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 window.suaSinhVien = async function (maSV) {
-  let data = await getApiDataIDAsync(BASE_URL_GET_ID_API, maSV);
+  try {
+    let data = await getApiDataIDAsync(BASE_URL_GET_ID_API, maSV);
 
-  for (const input of arrInput) {
-    input.value = data[input.name];
+    for (const input of arrInput) {
+      input.value = data[input.name];
+    }
+
+    document.querySelector("#btnThemSinhVien").classList.add("d-none");
+    document.querySelector("#btnLuuThongTin").classList.remove("d-none");
+    document.querySelector("#maSinhVien").disabled = true;
+  } catch (e) {
+    console.log(e);
   }
-
-  document.querySelector("#btnThemSinhVien").classList.add("d-none");
-  document.querySelector("#btnLuuThongTin").classList.remove("d-none");
-  document.querySelector("#maSinhVien").disabled = true;
 };
 
 window.loadAPI = async function (url) {
-  let data = await getApiDataAsync(url);
+  try {
+    let data = await getApiDataAsync(url);
 
-  renderTableSinhVien(data);
+    renderTableSinhVien(data);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 window.loadAPI(BASE_URL_GET_API);
