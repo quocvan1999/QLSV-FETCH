@@ -10,15 +10,12 @@ import {
 } from "../assets/util/method.js";
 
 let arrInput = document.querySelectorAll("#frmThongTinSinhVien .inputData");
-let BASE_URL_GET_API =
-  "https://svcy.myclass.vn/api/SinhVienApi/LayDanhSachSinhVien";
-let BASE_URL_POST_API = "https://svcy.myclass.vn/api/SinhVienApi/ThemSinhVien";
-let BASE_URL_DELETE_API =
-  "https://svcy.myclass.vn/api/SinhVienApi/XoaSinhVien?maSinhVien=";
-let BASE_URL_GET_ID_API =
-  "https://svcy.myclass.vn/api/SinhVienApi/LayThongTinSinhVien?maSinhVien=";
-let BASE_URL_PUT_ID_API =
-  "https://svcy.myclass.vn/api/SinhVienApi/CapNhatThongTinSinhVien?maSinhVien=";
+let BASE_URL = "https://svcy.myclass.vn/api/SinhVienApi/";
+let BASE_URL_GET_API = BASE_URL + "LayDanhSachSinhVien";
+let BASE_URL_POST_API = BASE_URL + "ThemSinhVien";
+let BASE_URL_DELETE_API = BASE_URL + "XoaSinhVien?maSinhVien=";
+let BASE_URL_GET_ID_API = BASE_URL + "LayThongTinSinhVien?maSinhVien=";
+let BASE_URL_PUT_ID_API = BASE_URL + "CapNhatThongTinSinhVien?maSinhVien=";
 
 document.querySelector("#valueSearch").oninput = async function () {
   let valueSearch = document.querySelector("#valueSearch").value;
