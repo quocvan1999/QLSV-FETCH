@@ -59,7 +59,7 @@ export async function getApiDataAsync(url) {
 }
 
 export async function getApiDataIDAsync(url, id) {
-  const response = await fetch(`${url}/${id}`);
+  const response = await fetch(`${url}${id}`);
   const data = await response.json();
 
   return data;
@@ -76,7 +76,7 @@ export async function postApiDataAsync(url, data) {
 }
 
 export async function putApiDataAsync(url, id, data) {
-  await fetch(`${url}/${id}`, {
+  await fetch(`${url}${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export async function putApiDataAsync(url, id, data) {
 }
 
 export async function deleteApiDataAsync(url, id) {
-  await fetch(`${url}/${id}`, {
+  await fetch(`${url}${id}`, {
     method: "DELETE",
   });
 }
