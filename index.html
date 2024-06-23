@@ -22,6 +22,125 @@
 
 <body>
 
+    <h2 class="text-center fw-bold mt-5 mb-3">Quản lý sinh viên</h2>
+    <div class="container">
+        <form action="" id="frmThongTinSinhVien">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="" class="form-label fw-bold">Mã sinh viên</label>
+                    <input type="text" class="form-control" name="maSinhVien" id="maSinhVien" aria-describedby="helpId"
+                        placeholder="Nhập mã sinh viên" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="form-label fw-bold">Tên sinh viên</label>
+                    <input type="text" class="form-control" name="tenSinhVien" id="tenSinhVien"
+                        aria-describedby="helpId" placeholder="Nhập tên sinh viên" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="loaiSinhVien" class="form-label fw-bold">Loại sinh viên</label>
+                    <select class="form-select" name="loaiSinhVien" id="loaiSinhVien">
+                        <option selected>Chọn loại sinh viên</option>
+                        <option value="Thường">Thường</option>
+                        <option value="Khá">Khá</option>
+                        <option value="Khó khăn">Khó khăn</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="form-label fw-bold">Điểm toán</label>
+                    <input type="number" class="form-control" name="diemToan" id="diemToan" aria-describedby="helpId"
+                        placeholder="Nhập điểm toán" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="form-label fw-bold">Điểm lý</label>
+                    <input type="number" class="form-control" name="diemLy" id="diemLy" aria-describedby="helpId"
+                        placeholder="Nhập điểm lý" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="form-label fw-bold">Điểm hoá</label>
+                    <input type="number" class="form-control" name="diemHoa" id="diemHoa" aria-describedby="helpId"
+                        placeholder="Nhập điểm hoá" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="form-label fw-bold">Điểm rèn luyện</label>
+                    <input type="number" class="form-control" name="diemRenLuyen" id="diemRenLuyen"
+                        aria-describedby="helpId" placeholder="Nhập điểm rèn luyện" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="form-label fw-bold">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="helpId"
+                        placeholder="Nhập email" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="" class="form-label fw-bold">Số điện thoại</label>
+                    <input type="number" class="form-control" name="soDienThoai" id="soDienThoai"
+                        aria-describedby="helpId" placeholder="Nhập số điện thoại" />
+                </div>
+                <div class="col-md-12">
+                    <button id="btnThemSinhVien" type="submit" class="btn btn-danger">Thêm sinh viên</button>
+                    <button id="btnLuuThongTin" type="submit" class="btn btn-info d-none">Lưu thông tin</button>
+                </div>
+            </div>
+        </form>
+
+        <h3 class="mt-5">Tìm kiếm sinh viên theo:</h3>
+        <div class="row gap-0">
+            <div class="col-md-3 pe-0 ">
+                <select class="form-select rounded-end-0" name="typeSearch" id="typeSearch">
+                    <option selected>Chọn loại tìm kiếm</option>
+                    <option value="tenSV">Tên sinh viên</option>
+                    <option value="loaiSV">Loại sinh viên</option>
+                </select>
+            </div>
+            <div class="col-md-9 ps-0">
+                <input type="text" class="form-control rounded-start-0" name="valueSearch" id="valueSearch"
+                    aria-describedby="helpId" placeholder="Nhập tìm kiếm" />
+            </div>
+        </div>
+
+        <table class="table table-striped mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Mã SV</th>
+                    <th scope="col">Họ & tên</th>
+                    <th scope="col">Loại SV</th>
+                    <th scope="col">Đ.Toán</th>
+                    <th scope="col">Đ.Lý</th>
+                    <th scope="col">Đ.Hoá</th>
+                    <th scope="col">Đ.rèn luyện</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">SĐT</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td class="d-flex justify-content-around align-items-center">
+                        <a onclick="suaSinhVien()" class="fs-6 text-success">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a onclick="xoaSinhVien()" class="fs-5 text-danger">
+                            <i class="fa-solid fa-xmark"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
