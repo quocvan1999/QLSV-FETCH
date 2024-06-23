@@ -52,43 +52,63 @@ export function setId(arr) {
 }
 
 export async function getApiDataAsync(url) {
-  const response = await fetch(url);
-  const data = await response.json();
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
 
-  return data;
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export async function getApiDataIDAsync(url, id) {
-  const response = await fetch(`${url}${id}`);
-  const data = await response.json();
+  try {
+    const response = await fetch(`${url}${id}`);
+    const data = await response.json();
 
-  return data;
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export async function postApiDataAsync(url, data) {
-  await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export async function putApiDataAsync(url, id, data) {
-  await fetch(`${url}${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  try {
+    await fetch(`${url}${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export async function deleteApiDataAsync(url, id) {
-  await fetch(`${url}${id}`, {
-    method: "DELETE",
-  });
+  try {
+    await fetch(`${url}${id}`, {
+      method: "DELETE",
+    });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export function resetInput(arrElement) {
